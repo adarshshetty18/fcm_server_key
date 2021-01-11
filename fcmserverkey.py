@@ -27,7 +27,7 @@ def check_apktool():
 # Decompiling the apk
 def decompile_apk(apk_file):
     try:
-        print(Fore.BLUE + f"[+] Decompiling {apk_file}!")
+        print(Fore.BLUE + f"[+] Decompiling {os.path.basename(apk_file)}!")
         os.popen(f"apktool d {apk_file}").read()
         print(Fore.BLUE + "[+] Apk decompiled!")
         return apk.split(".")[0]
@@ -54,7 +54,7 @@ def extract_keys(_out_dir):
             exit()
 
         keys = [i.split(":")[1] for i in res]
-        print(Fore.BLUE + f"[+] Found some tokens: {', '.join(keys)}")
+        print(Fore.BLUE + f"[+] Found some tokens: {', '.join(list(set(keys)))}")
         return list(set(keys))
     except Exception as e:
         print(Fore.RED + f"[!] Error in extracting keys: {e}")
