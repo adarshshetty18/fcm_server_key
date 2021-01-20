@@ -81,6 +81,9 @@ if __name__ == "__main__":
         apk = sys.argv[1]
         out_dir = decompile_apk(apk)
         server_keys = extract_keys(out_dir)
+        if not server_keys:
+            print(Fore.RED + "[-] FCM keys not found in extracted apk!")
+            exit()
         for server_key in server_keys:
             if validate_keys(server_key):
                 print(Fore.GREEN + f"[+] {server_key} is a valid server key")
